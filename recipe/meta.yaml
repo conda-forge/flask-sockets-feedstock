@@ -10,22 +10,24 @@ source:
   sha256: 072927da8edca0e81e024f5787e643c87d80b351b714de95d723becb30e0643b
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: "{{ PYTHON }} -m pip install . -vv"
 
 requirements:
   host:
     - pip
-    - python
+    - python {{ python_min }}
     - setuptools
   run:
-    - python
+    - python >={{ python_min }}
     - flask
     - gevent
     - gevent-websocket
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - flask_sockets
 
